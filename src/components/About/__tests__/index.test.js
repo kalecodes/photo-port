@@ -6,8 +6,7 @@ import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'
 // import About component
 import About from '..';
-// return a snapshot of the About component
-const { asFragment } = render(<About />);
+
 
 //ensure that after each test, there is no leftover memory data to affect results
 afterEach(cleanup);
@@ -20,6 +19,8 @@ describe(`About component`, () => {
     });
 
     // Second test
+    // return a snapshot of the About component
+    const { asFragment } = render(<About />);
     it('matches snapshot DOM node structure', () => {
         // test and compare whether the expected and actual outcomes match
         expect(asFragment()).toMatchSnapshot();
