@@ -8,9 +8,10 @@ function Nav(props) {
         currentCategory
     } = props;
 
-    useEffect(() => {
-        document.title = capitalizeFirstLetter(currentCategory.name);
-    }, [currentCategory]);
+    const handleClick = (item) => {
+        console.log(item);
+        return item;
+    }
 
     return (
         <header className='flex-row px-1'>
@@ -27,7 +28,7 @@ function Nav(props) {
                         </a>
                     </li>
                     <li>
-                        <span>Contact</span>
+                        <span onClick={() => handleClick('Contact')}>Contact</span>
                     </li>
                     {categories.map((category) => (
                         <li className={`mx-1 ${
