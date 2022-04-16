@@ -4,17 +4,32 @@ import '@testing-library/jest-dom/extend-expect';
 // import Nav component to test
 import Nav from '..';
 
+const categories = [
+    { name: 'portraits', description: 'Portraits of people in my life'}
+]
+const mockCurrentCategory = jest.fn();
+const mockSetCurrentCategory = jest.fn();
+
+
 afterEach(cleanup);
 
 describe('Nav component', () => {
     // baseline test
     it('renders', () => {
-        render(<Nav />);
+        render(<Nav 
+            categories={categories}
+            setCurrentCategory={mockSetCurrentCategory}
+            currentCategory={mockCurrentCategory}
+        />);
     });
 
     // snapshot test
     it('matches snapshot', () => {
-        const { asFragment } = render(<Nav />);
+        const { asFragment } = render(<Nav 
+            categories={categories}
+            setCurrentCategory={mockSetCurrentCategory}
+            currentCategory={mockCurrentCategory}
+        />);
         // assert value comparison
         expect(asFragment()).toMatchSnapshot();
     });
@@ -25,7 +40,11 @@ describe('Emoji visible', () => {
     it('inserts emoji into the h2', () => {
         //Arrange
         // query element by its aria-label value
-        const { getByLabelText } = render(<Nav />);
+        const { getByLabelText } = render(<Nav 
+            categories={categories}
+            setCurrentCategory={mockSetCurrentCategory}
+            currentCategory={mockCurrentCategory}
+        />);
         // use a custom matcher to compate expected value to one received by our query
         expect(getByLabelText('camera')).toHaveTextContent('📸');
         //Assert
@@ -37,7 +56,11 @@ describe('Emoji visible', () => {
 describe('links are visible', () => {
     it('inserts text into the links', () => {
         //Arrange
-        const { getByTestId } = render(<Nav />)
+        const { getByTestId } = render(<Nav 
+            categories={categories}
+            setCurrentCategory={mockSetCurrentCategory}
+            currentCategory={mockCurrentCategory}
+        />)
         //Assert the valid outcomes using the matcher 'toHaveTextContent
         expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
         expect(getByTestId('about')).toHaveTextContent('About Me');
