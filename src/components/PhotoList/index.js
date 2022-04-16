@@ -96,8 +96,8 @@ const PhotoList = ({ category }) => {
             name: 'Green parrot',
             category: 'portraits',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricie'
-        },
-    ])
+        }
+    ]);
 
     const currentPhotos = photos.filter((photo) => photo.category === category);
 
@@ -114,7 +114,7 @@ const PhotoList = ({ category }) => {
                 ))}
             </div>
         </div>
-    )
+    );
 };
 
 export default PhotoList;
