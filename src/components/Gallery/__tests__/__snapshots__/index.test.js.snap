@@ -14,7 +14,24 @@ exports[`Gallery is rendering matches snapshot 1`] = `
     <div>
       <div
         class="flex-row"
-      />
+      >
+        <img
+          alt="Cat green eyes"
+          class="img-thumbnail mx-1"
+        />
+        <img
+          alt="Yellow macaw"
+          class="img-thumbnail mx-1"
+        />
+        <img
+          alt="Pug smile"
+          class="img-thumbnail mx-1"
+        />
+        <img
+          alt="Green parrot"
+          class="img-thumbnail mx-1"
+        />
+      </div>
     </div>
   </section>
 </DocumentFragment>
