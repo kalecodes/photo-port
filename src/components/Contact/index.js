@@ -1,6 +1,38 @@
 import React, { useState } from 'react';
+import { validateEmail } from '../../utils/helpers';
 
 function ContactForm() {
+    const [errorMessage, setErrorMessage] = useState('');
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(formState)
+        // target email input element
+        if (e.target.name === 'email') {
+            // use validateEmail helper to return true or false if email is valid and store it in isValid constant
+            const isValid = validateEmail(e.target.value);
+            console.log(isValid);
+            // isValid conditional statement
+            if (!isValid) {
+                setErrorMessage('Your email is involved.');
+            } else {
+                setErrorMessage('');
+            }
+        // target remaining two elements
+        } else {
+            if (!e.target.value.length) {
+                setErrorMessage(`${e.target.name} is required`);
+            } else {
+                setErrorMessage('');
+            }
+        }
+        // state only updates if the form data has passed the quality tests
+        if (!errorMessage) {
+            setFormState({ ...formState, [e.target.name]: e.target.value });
+        }
+    }
+
+
     // initialize values of the state, and clear the input fields on component load
     const [formState, setFormState] = useState({ name: '', email: '', message: ''});
     // destructure formState into its named properties
@@ -14,28 +46,29 @@ function ContactForm() {
         setFormState({...formState, [e.target.name]: e.target.value })
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log(formState)
-    }
-
     return (
         <section>
             <h1>Contact Me</h1>
             <form id="contact-form" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" name="name" defaultValue={name} onChange={handleChange} />
+                    <input type="text" name="name" defaultValue={name} onBlur={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="name">Email address:</label>
-                    <input type="email" name="email" defaultValue={email} onChange={handleChange} />
+                    <input type="email" name="email" defaultValue={email} onBlur={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="message">Message:</label>
-                    <textarea name="message" rows="5" defaultValue={message} onChange={handleChange} />
+                    <textarea name="message" rows="5" defaultValue={message} onBlur={handleChange} />
                 </div>
             </form>
+            {errorMessage && (
+                // conditional error message only if errorMessage contains a message
+                <div>
+                    <p className='error-text'>{errorMessage}</p>
+                </div>
+            )}
             <button type="submit">Submit</button>
         </section>
     )
